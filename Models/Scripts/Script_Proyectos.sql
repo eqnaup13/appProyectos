@@ -1,14 +1,9 @@
-USE master;
+
+CREATE DATABASE ProyectosBD
 GO
 
-DECLARE @dbName NVARCHAR(128) = 'ProyectosBD';
-
-IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = @dbName)
-BEGIN
-    CREATE DATABASE ProyectosBD
-END
-
 USE ProyectosBD
+GO
 
 CREATE TABLE Estados(
 	EstadoId INT NOT NULL IDENTITY,
@@ -23,9 +18,9 @@ CREATE TABLE Proyectos(
 	Nombre NVARCHAR(100) NOT NULL,
 	Descripcion NVARCHAR(150) NOT NULL,
 	ProyectoPadre INT,
-	EstadoId INT NOT NULL,
 	FechaCreacion DATETIME2 NOT NULL,
-	FechaActualizacion DATETIME2
+	FechaActualizacion DATETIME2,
+	EstadoId INT NOT NULL
 );
 
 ALTER TABLE Proyectos
@@ -49,14 +44,16 @@ SELECT * FROM Estados;
 
 /* DML - SENTENCIAS INSERT */
 --TABLA PROYECTOS
-INSERT INTO Proyectos(Nombre,Descripcion,EstadoId,FechaCreacion) VALUES ('P-FRAMEWORK BI','Creación de la estructura de auditoría para BI',1,'2023-07-14 10:58:20');
-INSERT INTO Proyectos(Nombre,Descripcion,EstadoId,FechaCreacion) VALUES ('P-Experiencia integral','Generación de ETL Fase I',1,'2022-04-25 17:02:35');
-INSERT INTO Proyectos(Nombre,Descripcion,EstadoId,FechaCreacion) VALUES ('P-Tablero BI','Creación de Tableros BI',1,'2022-08-24 07:22:49');
-INSERT INTO Proyectos(Nombre,Descripcion,EstadoId,FechaCreacion) VALUES ('P-Sueco educación superior','Proyecto para la Universidad',1,'2020-01-09 15:59:01');
-INSERT INTO Proyectos(Nombre,Descripcion,EstadoId,FechaCreacion) VALUES ('P-Sueco Inventario','Proyecto para la Universidad',1,'2019-08-22 15:50:30');
-INSERT INTO Proyectos(Nombre,Descripcion,EstadoId,FechaCreacion) VALUES ('P-Sueco Predial','Proyecto para la Universidad',5,'2020-08-31 10:51:42');
-INSERT INTO Proyectos(Nombre,Descripcion,EstadoId,FechaCreacion) VALUES ('P-Sueco Nomina','Proyecto para la Universidad',1,'2020-11-02 23:57:58');
-INSERT INTO Proyectos(Nombre,Descripcion,EstadoId,FechaCreacion) VALUES ('P-Sueco Transito','Proyecto para la Universidad',5,'2021-02-05 14:38:24');
+INSERT INTO Proyectos(Nombre,Descripcion,FechaCreacion,EstadoId) VALUES ('P-FRAMEWORK BI','Creación de la estructura de auditoría para BI','2023-07-14',1);
+INSERT INTO Proyectos(Nombre,Descripcion,FechaCreacion,EstadoId) VALUES ('P-Experiencia integral','Generación de ETL Fase I','2022-04-25',1);
+INSERT INTO Proyectos(Nombre,Descripcion,FechaCreacion,EstadoId) VALUES ('P-Tablero BI','Creación de Tableros BI','2022-08-24',1);
+INSERT INTO Proyectos(Nombre,Descripcion,FechaCreacion,EstadoId) VALUES ('P-Sueco educación superior','Proyecto para la Universidad','2020-01-09',1);
+INSERT INTO Proyectos(Nombre,Descripcion,FechaCreacion,EstadoId) VALUES ('P-Sueco Inventario','Proyecto para la Universidad','2019-08-22',1);
+INSERT INTO Proyectos(Nombre,Descripcion,FechaCreacion,EstadoId) VALUES ('P-Sueco Predial','Proyecto para la Universidad','2020-08-31',5);
+INSERT INTO Proyectos(Nombre,Descripcion,FechaCreacion,EstadoId) VALUES ('P-Sueco Nomina','Proyecto para la Universidad','2020-11-02',1);
+INSERT INTO Proyectos(Nombre,Descripcion,FechaCreacion,EstadoId) VALUES ('P-Sueco Transito','Proyecto para la Universidad','2021-02-05',5);
 
 -- DQL - SENTENCIAS SELECT
 SELECT * FROM Proyectos;
+
+TRUNCATE TABLE Proyectos;
